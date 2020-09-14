@@ -7,7 +7,7 @@
 ```
 virtualenv -p python3 .
 source bin/activate
-git clone https://github.com/somya-kapoor/flask
+git clone https://github.com/somya-kapoor/final
 cd flask
 pip install -r requirements.txt
 python app.py

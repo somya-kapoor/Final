@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+	<a href="/logout">Logout</a> <br> <br>
+	{% if data %}
+		{% for one_story in data %}
+			<b>{{ one_story["story_title"] }}</b> <a href="{{ one_story.story_link }}">click here for the story</a> <br>
+		{% endfor %}
+	{% else %}
+
+	
+	<!-- <form action="" method="POST">
+	  <input type="username" name="username" placeholder="Instagram Username">
+	  <input type="submit" value="Finds">
+	</form> -->
+	{% endif %}
+
+{% else %}
+<p>You're not logged in!</p>
+
+<a href="/login">Login</a> 
+<a href="/register">Register</a>
+
+{% endif %}
+{% endblock %}

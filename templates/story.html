@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+	<a href="/logout">Logout</a> <br> <br>
+
+	{% if data %}
+		<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		<script>
+		var socket = io("http://142.93.108.220:3000");
+		socket.emit('room', "{{ data.story_key }}");
+		socket.on("reader-count-{{ data.story_key }}", function(msg) {
+			console.log(msg)
+			document.getElementById('reader-count').innerHTML = "How many people are currently reading? : <b>" + msg + "</b>";
+		});
+		
+		</script>
+		<h2>{{ data["story_title"] }}</h2>
+		<br>
+		<p>{{ data["story_body"] }}</p>
+		<br>
+		<br>
+		Total number of people who have read this story: <b>{{ data["story_read_count"] }}</b>
+		<br>
+		<p id="reader-count">How many people are currently reading? :</p>
+		<br>
+	{% else %}
+
+
+	{% endif %}
+	<br>
+	<br>
+	<a href="/">Go back</a> 
+	<br>
+	<br>
+
+{% else %}
+<p>You're not logged in!</p>
+
+<a href="/login">Login</a> 
+<a href="/register">Register</a>
+
+{% endif %}
+{% endblock %}
